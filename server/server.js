@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/mongodb.js";
+import userRouter from './routes/userRoutes.js';
 
 
 //  App Config 
@@ -11,12 +12,13 @@ connectDB()
 
 
 // Api routes
-app.get('/',(req,res)=> res.send("api working"))
+app.get('/', (req, res) => res.send("api working"))
+app.use('/api/user', userRouter)
 
 // middelware
 app.use(express.json());
 app.use(cors());
 
-app.listen(PORT, ()=>{
-    console.log("Server runing on port "+PORT);
+app.listen(PORT, () => {
+    console.log("Server runing on port " + PORT);
 })
